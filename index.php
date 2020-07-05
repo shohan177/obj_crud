@@ -8,6 +8,30 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/responsive.css">
 </head>
+<?php 
+	if (isset($_POST['save'])) {
+		/**
+		 * fild value recive 
+		 */
+		echo $name = $_POST['name'];
+		echo $email = $_POST['email'];
+		echo $cell = $_POST['cell'];
+		//echo $photo = $_POST['photo'];
+
+
+		/**
+		 * empty fild validation 
+		 */
+		if (empty($name) || empty($email) || empty($cell) ) {
+			$mess = '<p class="alert alert-warning"> All Fied are Required ! <button class="close" data-dismiss="alert">&times;</button></p>';
+		}else{
+
+		}
+		
+	}
+
+
+ ?>
 <body>
 	
 	
@@ -15,27 +39,34 @@
 	<div class="wrap ">
 		<a class="btn btn-info" href="all_data.php">show all</a>
 		<div class="card shadow">
+			<?php 
+
+			if (isset($mess)) {
+				echo $mess;
+			}
+
+			 ?>
 			<div class="card-body">
 				<h2>Sign Up</h2>
-				<form action="<?php echo $_SERVER['PHP_SELF']?>">
+				<form action="<?php echo $_SERVER['PHP_SELF']?>"  method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="">Name</label>
-						<input class="form-control" type="text">
+						<input name="name" class="form-control" type="text">
 					</div>
 					<div class="form-group">
 						<label for="">Email</label>
-						<input class="form-control" type="text">
+						<input name="email" class="form-control" type="text">
 					</div>
 					<div class="form-group">
 						<label for="">Cell</label>
-						<input class="form-control" type="text">
+						<input name="cell" class="form-control" type="text">
 					</div>
 					<div class="form-group">
-						<label for="">Username</label>
-						<input class="form-control" type="text">
+						<label for="">Photo</label>
+						<input name="photo" class="form-control" type="file">
 					</div>
 					<div class="form-group">
-						<input class="btn btn-primary" type="submit" value="Sign Up">
+						<input name="save" class="btn btn-primary" type="submit" value="Sign Up">
 					</div>
 				</form>
 			</div>
