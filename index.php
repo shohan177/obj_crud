@@ -1,3 +1,18 @@
+<?php require_once 'vendor/autoload.php' ?>
+<?php 
+ /**
+  * class location' This "App" is the replace of the app folder 
+  */
+ use App\Controller\Student;
+ 
+ //class instance
+ $stu = new Student;
+
+
+
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +28,10 @@
 		/**
 		 * fild value recive 
 		 */
-		echo $name = $_POST['name'];
-		echo $email = $_POST['email'];
-		echo $cell = $_POST['cell'];
-		//echo $photo = $_POST['photo'];
+		$name = $_POST['name'];
+		$email = $_POST['email'];
+		$cell = $_POST['cell'];
+		$photo = $_FILES['photo'];
 
 
 		/**
@@ -24,8 +39,13 @@
 		 */
 		if (empty($name) || empty($email) || empty($cell) ) {
 			$mess = '<p class="alert alert-warning"> All Fied are Required ! <button class="close" data-dismiss="alert">&times;</button></p>';
-		}else{
+		}
+		elseif (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+			$mess = '<p class="alert alert-info"> email erro !! <button class="close" data-dismiss="alert">&times;</button></p>';
+		}
+		else{
 
+			$mess = $stu -> AddNewStudent($name, $email, $cell, $photo);
 		}
 		
 	}
