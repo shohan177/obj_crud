@@ -113,4 +113,39 @@ abstract class Database
 			}
 		}
 
+		/****************************************
+		 * view single user funcation
+		 ***************************************/
+
+		protected function find($table,$id)
+		{
+			$sql = "SELECT * FROM $table WHERE id = '$id'";
+			$data = $this -> Connection()  -> query($sql);
+
+			if ($data) {
+				return $data;
+			}
+		}
+
+		/****************************************
+		 * Update single user funcation
+		 ***************************************/
+
+		protected function update($table, array $data)
+		{
+
+			foreach ($data as $key => $value) {
+				$arra[] = $key."="."'".$value."'";
+			}
+		
+			$condiation = implode(',',$arra);
+
+			$sql = "UPDATE $table SET $condiation ";
+			$data = $this -> Connection()  -> query($sql);
+
+			if ($data) {
+				return true;
+			}
+
+		}
 }

@@ -8,12 +8,13 @@
  //class instance
  $stu = new Student;
 
-//sent id for delete user
-if (isset($_GET['delete']))
-{
-	
-	$mess = $stu -> delstudent($_GET['delete']);
-}
+	//sent id for delete single user
+	if (isset($_GET['delete']))
+	{
+		
+		$mess = $stu -> delstudent($_GET['delete']);
+	}
+
 
 
 
@@ -40,7 +41,7 @@ if (isset($_GET['delete']))
 		<div class="card">
 			<?php 
 
-				if ($mess) {
+				if (isset($mess)) {
 						echo $mess;
 					}	
 
@@ -72,8 +73,8 @@ if (isset($_GET['delete']))
 							<td><?php echo $student['cell']; ?></td>
 							<td><img src="media/student/img<?php echo $student['photo']; ?>" alt=""></td>
 							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
+								<a class="btn btn-sm btn-info" href="view_singel_user.php?view=<?php echo $student['id'];?>">View</a>
+								<a class="btn btn-sm btn-warning" href="edit_user.php?edit=<?php echo $student['id'];?>">Edit</a>
 								<a class="btn btn-sm btn-danger" href="?delete=<?php echo $student['id'];?> ">Delete</a>
 							</td>
 						</tr>
