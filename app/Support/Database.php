@@ -28,6 +28,7 @@ abstract class Database
 	{
 		return $this -> connection = new mysqli($this -> host, $this -> user, $this -> pass, $this -> db);
 	}
+
 		/*************************************
 		 * Media insert funaction
 		 ************************************/
@@ -84,6 +85,32 @@ abstract class Database
 
 		}
 
+		/****************************************
+		 * read all data from database funaction
+		 ****************************************/
 
+		protected function all($table, $order_by)
+		{
+			$sql = "SELECT * FROM $table ORDER BY id $order_by";
+			$data = $this -> Connection()  -> query($sql);
+
+			if ($data) {
+				return $data;
+			}
+		}
+
+
+		/****************************************
+		 * delete singele user  
+		 ****************************************/
+		protected function delete($table,$id)
+		{
+			$sql = "DELETE FROM $table WHERE id = '$id'";
+			$data = $this -> Connection()  -> query($sql);
+
+			if ($data) {
+				return true;
+			}
+		}
 
 }

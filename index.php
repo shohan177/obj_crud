@@ -45,7 +45,7 @@
 		}
 		else{
 
-			$mess = $stu -> AddNewStudent($name, $email, $cell, $photo);
+			$mess = $stu -> addNewStudent($name, $email, $cell, $photo);
 		}
 		
 	}

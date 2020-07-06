@@ -1,3 +1,26 @@
+<?php require_once 'vendor/autoload.php' ?>
+<?php 
+ /**
+  * class location' This "App" is the replace of the app folder 
+  */
+ use App\Controller\Student;
+ 
+ //class instance
+ $stu = new Student;
+
+//sent id for delete user
+if (isset($_GET['delete']))
+{
+	
+	$mess = $stu -> delstudent($_GET['delete']);
+}
+
+
+
+
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +38,13 @@
 	<div class="wrap-table shadow">
 		<a class="btn btn-danger" href="index.php">Insert data</a>
 		<div class="card">
+			<?php 
+
+				if ($mess) {
+						echo $mess;
+					}	
+
+			 ?>
 			<div class="card-body">
 				<h2>All Data</h2>
 				<table class="table table-striped">
@@ -29,66 +59,27 @@
 						</tr>
 					</thead>
 					<tbody>
+						<?php 
+
+						 $data = $stu -> allStudent();
+						 $i = 0;
+						 while ($student = $data -> fetch_assoc()): 
+						 ?>
 						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
+							<td><?php  echo $i++ ?></td>
+							<td><?php echo $student['name']; ?></td>
+							<td><?php echo $student['email']; ?></td>
+							<td><?php echo $student['cell']; ?></td>
+							<td><img src="media/student/img<?php echo $student['photo']; ?>" alt=""></td>
 							<td>
 								<a class="btn btn-sm btn-info" href="#">View</a>
 								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
+								<a class="btn btn-sm btn-danger" href="?delete=<?php echo $student['id'];?> ">Delete</a>
 							</td>
 						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
+
+					<?php endwhile; ?>
+						
 						
 
 					</tbody>
