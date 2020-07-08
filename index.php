@@ -32,6 +32,7 @@
 		$email = $_POST['email'];
 		$cell = $_POST['cell'];
 		$photo = $_FILES['photo'];
+	    $ct = $_POST['ct'];
 
 
 		/**
@@ -45,7 +46,7 @@
 		}
 		else{
 
-			$mess = $stu -> addNewStudent($name, $email, $cell, $photo);
+			$mess = $stu -> addNewStudent($name, $email, $cell, $photo, $ct);
 		}
 		
 	}
@@ -69,6 +70,13 @@
 			<div class="card-body">
 				<h2>Sign Up</h2>
 				<form action="<?php echo $_SERVER['PHP_SELF']?>"  method="POST" enctype="multipart/form-data">
+					<div class="form-group">
+						 <select class="custom-select" name="ct" id="inputGroupSelect01">
+						    <option selected>students</option>
+						    <option value="teachers">Teachers</option>
+						    <option value="staffs">Staffs</option> 
+						  </select>
+					</div>
 					<div class="form-group">
 						<label for="">Name</label>
 						<input name="name" class="form-control" type="text">

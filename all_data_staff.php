@@ -3,16 +3,16 @@
  /**
   * class location' This "App" is the replace of the app folder 
   */
- use App\Controller\Student;
+ use App\Controller\Staff;
  
  //class instance
- $stu = new Student;
+ $sta = new Staff;
 
 	//sent id for delete single user
 	if (isset($_GET['delete']))
 	{
 		
-		$mess = $stu -> delstudent($_GET['delete']);
+		$mess = $sta -> delStaff($_GET['delete']);
 	}
 
 
@@ -26,7 +26,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Student data</title>
+	<title>Staff data</title>
 	<!-- ALL CSS FILES  -->
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
@@ -38,8 +38,8 @@
 
 	<div class="wrap-table shadow">
 		<a class="btn btn-danger" href="index.php">Insert data</a>
-		<a class="btn btn-info" href="all_techer_data.php">Teacher</a>
-		<a class="btn btn-success" href="all_data_staff.php">Staff</a>
+		<a class="btn btn-info" href="all_data.php">Student</a>
+		<a class="btn btn-success" href="all_techer_data.php">Teacher</a>
 		<div class="card">
 			<?php 
 
@@ -49,7 +49,7 @@
 
 			 ?>
 			<div class="card-body">
-				<h2>All Student</h2>
+				<h2>All Staff</h2>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -64,20 +64,20 @@
 					<tbody>
 						<?php 
 
-						 $data = $stu -> allStudent();
+						 $data = $sta -> allStaff();
 						 $i = 0;
-						 while ($student = $data -> fetch_assoc()): 
+						 while ($staff = $data -> fetch_assoc()): 
 						 ?>
 						<tr>
 							<td><?php  echo $i++ ?></td>
-							<td>Student - <?php echo $student['name']; ?></td>
-							<td><?php echo $student['email']; ?></td>
-							<td><?php echo $student['cell']; ?></td>
-							<td><img src="media/student/img<?php echo $student['photo']; ?>" alt=""></td>
+							<td>Staf - <?php echo $staff['name']; ?></td>
+							<td><?php echo $staff['email']; ?></td>
+							<td><?php echo $staff['cell']; ?></td>
+							<td><img src="media/student/img<?php echo $staff['photo']; ?>" alt=""></td>
 							<td>
-								<a class="btn btn-sm btn-info" href="view_singel_user.php?view_stu=<?php echo $student['id'];?>">View</a>
-								<a class="btn btn-sm btn-warning" href="edit_user.php?edit_stu=<?php echo $student['id'];?>">Edit</a>
-								<a class="btn btn-sm btn-danger" href="?delete=<?php echo $student['id'];?> ">Delete</a>
+								<a class="btn btn-sm btn-info" href="view_singel_user.php?view_stf=<?php echo $staff['id'];?>">View</a>
+								<a class="btn btn-sm btn-warning" href="edit_user.php?edit_stf=<?php echo $staff['id'];?>">Edit</a>
+								<a class="btn btn-sm btn-danger" href="?delete=<?php echo $staff['id'];?> ">Delete</a>
 							</td>
 						</tr>
 

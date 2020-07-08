@@ -9,13 +9,13 @@ class Student extends Database
 	/**
 	 * inser user information 
 	 */
-	public function addNewStudent($name, $email, $cell, $photo)
+	public function addNewStudent($name, $email, $cell, $photo, $table_name)
 	{
 		$photo_name = parent::fileUpload($photo,'media/student/img');
 
 
 
-		$notification = parent::insert('students', [
+		$notification = parent::insert($table_name, [
 
 			'name'      => $name,
 			'email'     => $email,

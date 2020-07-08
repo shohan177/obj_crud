@@ -1,17 +1,34 @@
 <?php require_once 'vendor/autoload.php' ?>
 <?php 
- /**
-  * class location' This "App" is the replace of the app folder 
-  */
- use App\Controller\Student;
- 
- //class instance
- $stu = new Student;
-
-if (isset($_GET['edit'])) {
 	
-	$single_student = $stu -> viewStudent($_GET['edit']);
+	use App\Controller\Student;
+	use App\Controller\Teacher;
+	use App\Controller\Staff;
+ 	
+ 	$stu = new Student;
+ 	$te = new Teacher;
+ 	$sta = new Staff;
+
+
+
+if (isset($_GET['edit_stu'])) {
+	//Data recive for student
+	$triger = "edit_stu";
+	$user_data = $stu -> viewStudent($_GET['edit_stu']);
+
+}elseif (isset($_GET['edit_te'])) {
+	//data recive for teacher 
+	$triger = "edit_te";
+	$user_data = $te -> viewTeacher($_GET['edit_te']);
+	//data recive for staff
+} elseif (isset($_GET['edit_stf'])) {
+	//data recive for staff
+	$triger = "edit_stf";
+	$user_data = $sta -> viewStaff($_GET['edit_stf']);
+	
 }
+	
+
 
 
  ?>
@@ -39,6 +56,7 @@ if (isset($_GET['edit'])) {
 		$old_p = $_POST['old'];
 		$new_p = $_FILES['photo']['name']; 
 
+		//recive new photo update valu
 		if (empty($new_p)) {
 			$photo = $old_p;
 			$photo_status = "old";
@@ -58,9 +76,26 @@ if (isset($_GET['edit'])) {
 			$mess = '<p class="alert alert-info"> email erro !! <button class="close" data-dismiss="alert">&times;</button></p>';
 		}
 		else{
+			
+
+		if (isset($_GET['edit_stu'])) {
 
 			$mess = $stu -> updateStudent($name, $email, $cell, $photo,$photo_status);
 			header("location:all_data.php");
+
+		}elseif (isset($_GET['edit_te'])) {
+			
+			$mess = $te -> updateTeacher($name, $email, $cell, $photo,$photo_status);
+			header("location:all_techer_data.php");
+
+		} elseif(isset($_GET['edit_stf'])) {
+
+			$mess = $sta -> updateStaff($name, $email, $cell, $photo,$photo_status);
+			header("location:all_data_staff.php");
+			
+		}
+
+			
 		}
 		
 	}
@@ -72,7 +107,7 @@ if (isset($_GET['edit'])) {
 	
 
 	<div class="wrap ">
-		<a class="btn btn-info" href="all_data.php">show all</a>
+		
 		<div class="card shadow">
 			<?php 
 
@@ -82,23 +117,23 @@ if (isset($_GET['edit'])) {
 
 			 ?>
 			<div class="card-body">
-				<h2>Sign Up</h2>
-				<form action="<?php echo $_SERVER['PHP_SELF']?>?edit=<?php echo $single_student['id'] ?>"  method="POST" enctype="multipart/form-data">
+				<h2>Edit - <?php echo $user_data['name']?> </h2>
+				<form action="<?php echo $_SERVER['PHP_SELF']?>?<?php echo $triger;?>=<?php echo $user_data['id'] ?>"  method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="">Name</label>
-						<input name="name" value = "<?php echo $single_student['name']?>"class="form-control" type="text">
+						<input name="name" value = "<?php echo $user_data['name']?>"class="form-control" type="text">
 					</div>
 					<div class="form-group">
 						<label for="">Email</label>
-						<input name="email" value = "<?php echo $single_student['email']?>"class="form-control" type="text">
+						<input name="email" value = "<?php echo $user_data['email']?>"class="form-control" type="text">
 					</div>
 					<div class="form-group">
 						<label for="">Cell</label>
-						<input name="cell" value = "<?php echo $single_student['cell']?>"class="form-control" type="text">
+						<input name="cell" value = "<?php echo $user_data['cell']?>"class="form-control" type="text">
 					</div>
 					<div class="form-group">
-						<img src="media/student/img<?php echo $single_student['photo']?>" style="height:100px; width:100px; border-radius:150px 150px; " alt="">
-						<input type="hidden" name="old" value="<?php echo $single_student['photo']?>" id="">
+						<img src="media/student/img<?php echo $user_data['photo']?>" style="height:100px; width:100px; border-radius:150px 150px; " alt="">
+						<input type="hidden" name="old" value="<?php echo $user_data['photo']?>" id="">
 					</div>
 					
 					<div class="form-group">
