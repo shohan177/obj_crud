@@ -66,7 +66,7 @@ class Student extends Database
 	/**
 	 * update student 
 	 */
-	public function updateStudent($name, $email, $cell, $photo, $photo_status)
+	public function updateStudent($id,$name, $email, $cell, $photo, $photo_status)
 	{
 		if ( $photo_status == "new") {
 			$photo_name = parent::fileUpload($photo,'media/student/img');
@@ -74,7 +74,7 @@ class Student extends Database
 			$photo_name = $photo;
 		}
 
-		$data = parent::update('students', [
+		$data = parent::update('students',$id, [
 
 			'name'      => $name,
 			'email'     => $email,

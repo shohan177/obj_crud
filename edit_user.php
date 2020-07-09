@@ -49,6 +49,7 @@ if (isset($_GET['edit_stu'])) {
 		/**
 		 * fild value recive 
 		 */
+		$id = $user_data['id'];
 		$name = $_POST['name'];
 		$email = $_POST['email'];
 		$cell = $_POST['cell'];
@@ -80,17 +81,17 @@ if (isset($_GET['edit_stu'])) {
 
 		if (isset($_GET['edit_stu'])) {
 
-			$mess = $stu -> updateStudent($name, $email, $cell, $photo,$photo_status);
+			$mess = $stu -> updateStudent($id,$name, $email, $cell, $photo,$photo_status);
 			header("location:all_data.php");
 
 		}elseif (isset($_GET['edit_te'])) {
 			
-			$mess = $te -> updateTeacher($name, $email, $cell, $photo,$photo_status);
+			$mess = $te -> updateTeacher($id,$name, $email, $cell, $photo,$photo_status);
 			header("location:all_techer_data.php");
 
 		} elseif(isset($_GET['edit_stf'])) {
 
-			$mess = $sta -> updateStaff($name, $email, $cell, $photo,$photo_status);
+			$mess = $sta -> updateStaff($id,$name, $email, $cell, $photo,$photo_status);
 			header("location:all_data_staff.php");
 			
 		}

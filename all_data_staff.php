@@ -65,7 +65,7 @@
 						<?php 
 
 						 $data = $sta -> allStaff();
-						 $i = 0;
+						 $i = 1;
 						 while ($staff = $data -> fetch_assoc()): 
 						 ?>
 						<tr>
